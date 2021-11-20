@@ -31,7 +31,7 @@ Usuario.findById = (idUsuario, result) => {
     sql.query('SELECT * FROM usuarios WHERE idusuarios = ?', idUsuario, (err,res) => {
         if(err){
             result(err,null);
-        } else if(res.lenght){
+        } else if(res.length){
             result(null,res[0]);
         } else {
             result({kind:"not_found"}, null);

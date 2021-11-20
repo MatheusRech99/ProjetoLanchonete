@@ -5,7 +5,7 @@ module.exports = app => {
 
 
     app.post("/produtos",produtoController.create);
-    app.get("/produtos",[authJwt.verifyToken] ,produtoController.findAll);
+    app.get("/produtos",[authJwt.verifyToken, authJwt.isAdmin] ,produtoController.findAll);
     app.get("/produtos/:produtoId", produtoController.findById);
     app.put("/produtos/:produtoId", produtoController.update);
     app.delete("/produtos/:produtoId", produtoController.delete);

@@ -24,6 +24,43 @@ verifyToken = (req, res, next) => {
     }
 }
 
+isAdmin = (req,res,next) => {
+    usuarioModel.findById(req.body.usuarioId, (err,data) => {
+        if(data.tipo == 1){
+            next();
+        } else {
+            res.send(403).send({
+                message:"Você não é adminstrador para executar esta ação!"
+            })
+        }
+    })
+}
+isBalcao = (req,res,next) => {
+    usuarioModel.findById(req.body.usuarioId, (err,data) => {
+        if(data.tipo == 2){
+            next();
+        } else {
+            res.send(403).send({
+                message:"Você não é balconista para executar esta ação!"
+            })
+        }
+    })
+}
+isCozinha = (req,res,next) => {
+    usuarioModel.findById(req.body.usuarioId, (err,data) => {
+        if(data.tipo == 3){
+            next();
+        } else {
+            res.send(403).send({
+                message:"Você não é da Cozinha para executar esta ação!"
+            })
+        }
+    })
+}
+
 module.exports = {
-    verifyToken: verifyToken
+    verifyToken: verifyToken,
+    isAdmin: isAdmin,
+    isBalcao: isBalcao,
+    isCozinha: isCozinha
 }
